@@ -3,360 +3,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تحليل مراجعات مكعب (MOKAB) — دراسة تنافسية شاملة</title>
+<title>مكعب — الداشبورد الرئيسي المجمّع (3 فروع)</title>
 <style>
-  :root{
-    --navy:#1e3957; --navy2:#2d5480; --soft:#eef2f7;
-    --bg:#f6f8fb; --card:#fff; --border:#e2e8f0;
-    --text:#1c2a3a; --muted:#64748b;
-    --gold:#d99a1b; --green:#1b8a5a; --red:#c53434; --amber:#c97a12; --teal:#0f766e;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Tahoma,Arial,sans-serif;line-height:1.75}
-  .wrap{max-width:1200px;margin:0 auto;padding:32px 20px 80px}
-  header.hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:18px;padding:36px 32px;margin-bottom:24px}
-  .eyebrow{color:#bcd0e5;font-weight:700;font-size:13px;letter-spacing:.5px}
-  h1{font-size:30px;margin:8px 0 6px;color:#fff}
-  .sub{color:#cfe0ee;font-size:15px;max-width:800px}
-  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}
-  .kpi{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px}
-  .kpi .val{font-size:26px;font-weight:800;color:#fff;line-height:1.2}
-  .kpi .lbl{color:#cfe0ee;font-size:12.5px;margin-top:6px}
-  .kpi.gold .val{color:#ffd166}.kpi.green .val{color:#7be0b0}.kpi.red .val{color:#ff9b9b}
-  section{margin-bottom:22px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
-  .card h2{font-size:19px;margin:0 0 4px;color:var(--navy)}
-  .card .desc{color:var(--muted);font-size:13.5px;margin-bottom:20px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  .bars{display:flex;flex-direction:column;gap:12px}
-  .row{display:grid;grid-template-columns:190px 1fr 118px;align-items:center;gap:12px}
-  .row .name{font-size:13.5px;font-weight:600;color:var(--text);text-align:left;direction:rtl}
-  .track{background:var(--soft);border-radius:6px;height:22px;overflow:hidden;position:relative}
-  .fill{height:100%;border-radius:6px;background:var(--navy);transition:width .3s}
-  .fill.gold{background:var(--gold)}.fill.green{background:var(--green)}.fill.red{background:var(--red)}
-  .fill.amber{background:var(--amber)}.fill.teal{background:var(--teal)}
-  .row .num{font-size:12.5px;color:var(--muted);white-space:nowrap;text-align:left}
-  .row .num b{color:var(--text);font-size:14px}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  th,td{padding:11px 10px;border-bottom:1px solid var(--border);text-align:right}
-  th{color:#fff;background:var(--navy);font-weight:600;font-size:12.5px}
-  th:first-child{border-radius:0 8px 0 0}th:last-child{border-radius:8px 0 0 0}
-  tbody tr:hover{background:#fafbfd}
-  td.n{font-variant-numeric:tabular-nums;font-weight:700}
-  .quote{background:var(--soft);border-right:3px solid var(--red);border-radius:8px;padding:11px 14px;margin:8px 0;font-size:13px;color:#33475a}
-  .quote.pos{border-right-color:var(--green)}
-  .insight{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--border)}
-  .insight:last-child{border-bottom:none}
-  .insight .num2{width:34px;height:34px;flex:none;border-radius:9px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
-  .insight h3{margin:0 0 5px;font-size:15.5px;color:var(--navy)}
-  .insight p{margin:0;color:var(--muted);font-size:13.5px}
-  .insight .ev{display:inline-block;background:rgba(30,57,87,.08);color:var(--navy);border-radius:6px;padding:1px 8px;font-size:12px;font-weight:700;margin-top:6px}
-  footer{color:var(--muted);font-size:12.5px;margin-top:26px;border-top:1px solid var(--border);padding-top:18px}
-  .badge{display:inline-block;background:rgba(217,154,27,.15);color:var(--amber);border:1px solid rgba(217,154,27,.4);border-radius:999px;padding:3px 10px;font-size:12px;margin-inline-start:8px}
-  .note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:13px;color:#78530f;margin-top:16px}
-  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.row{grid-template-columns:130px 1fr 96px}}
+:root{
+  --navy:#1e3957; --navy2:#2d5480; --soft:#eef2f7; --bg:#f6f8fb;
+  --card:#fff; --border:#e2e8f0; --text:#1c2a3a; --muted:#64748b;
+  --gold:#d99a1b; --green:#1b8a5a; --red:#c53434; --amber:#c97a12; --teal:#0f766e;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Tahoma","Segoe UI",Arial,sans-serif;line-height:1.7;}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:40px 24px 32px;}
+.hero .eyebrow{font-size:14px;opacity:.85;margin-bottom:6px;}
+.hero h1{margin:0 0 6px;font-size:28px;}
+.hero .sub{opacity:.9;font-size:15px;margin-bottom:20px;}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;max-width:1100px;}
+.kpi{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:14px 16px;}
+.kpi .v{font-size:24px;font-weight:700;}
+.kpi .l{font-size:12.5px;opacity:.9;margin-top:2px;}
+main{max-width:1100px;margin:0 auto;padding:24px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(30,57,87,.05);}
+.card h2{margin:0 0 14px;font-size:19px;color:var(--navy);display:flex;align-items:center;gap:8px;}
+.card h2 .num{background:var(--navy);color:#fff;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.bars .row{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:13.5px;}
+.bars .lbl{width:150px;flex-shrink:0;color:var(--text);}
+.bars .track{flex:1;background:var(--soft);border-radius:8px;height:16px;overflow:hidden;}
+.bars .fill{height:100%;background:linear-gradient(90deg,var(--navy2),var(--navy));border-radius:8px;}
+.bars .val{width:100px;flex-shrink:0;color:var(--muted);font-size:12.5px;text-align:left;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px;}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--border);}
+th{color:var(--muted);font-weight:600;font-size:12.5px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr;}}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:600;}
+.tag.g{background:#e6f4ed;color:var(--green);}
+.tag.r{background:#fbe9e9;color:var(--red);}
+.tag.a{background:#fdf1de;color:var(--amber);}
+.quote{background:var(--soft);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:8px;color:#334;}
+ol.rec li{margin-bottom:10px;font-size:14px;}
+ol.rec .ev{display:block;color:var(--muted);font-size:12px;margin-top:2px;}
+footer{max-width:1100px;margin:0 auto;padding:20px 24px 40px;color:var(--muted);font-size:12.5px;line-height:1.8;}
+.branch-card{background:var(--soft);border:1px solid var(--border);border-radius:14px;padding:16px 18px;}
+.branch-card h3{margin:0 0 4px;font-size:16px;color:var(--navy);}
+.branch-card .addr{font-size:12px;color:var(--muted);margin-bottom:10px;}
+.branch-card .stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.branch-card .stat{background:#fff;border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;}
+.branch-card .stat b{display:block;font-size:15px;color:var(--navy);}
+.branch-card a.btn{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;padding:8px 14px;border-radius:8px;font-size:12.5px;font-weight:600;}
+.branch-card a.btn:hover{background:var(--navy2);}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<header class="hero">
-  <div class="eyebrow">دراسة تنافسية شاملة — تحليل 100٪ من مراجعات العملاء</div>
-  <h1>مكعب MOKAB <span class="badge">إكسسوارات جوال وسيارة</span></h1>
-  <div class="sub">تحليل كامل لكل مراجعة على خرائط جوجل (2,679 مراجعة) — بالأعداد والنسب، لاستخلاص المنتجات والخدمات الأكثر طلباً، محركات الرضا، وقائمة السلبيات المرتبة، قبل إطلاق نشاط منافس.</div>
+<div class="hero">
+  <div class="eyebrow">تحليل مراجعات جوجل ماب — مكعب</div>
+  <h1>الداشبورد الرئيسي المجمّع — 3 فروع</h1>
+  <div class="sub">دمج تحليل فروع التعاون (الرياض) والملقا (الرياض) والربيع (الرياض) لدعم قرارات فتح نشاط منافس على مستوى الشركة</div>
   <div class="kpis">
-    <div class="kpi gold"><div class="val">4.59</div><div class="lbl">متوسط التقييم من 5</div></div>
-    <div class="kpi"><div class="val">2,679</div><div class="lbl">إجمالي المراجعات — حُلّلت بالكامل</div></div>
-    <div class="kpi"><div class="val">2,306</div><div class="lbl">مراجعة تحتوي نصاً مكتوباً (86٪)</div></div>
-    <div class="kpi green"><div class="val">84.1٪</div><div class="lbl">تقييم 5 نجوم (2,254)</div></div>
-    <div class="kpi red"><div class="val">7.9٪</div><div class="lbl">تقييم سلبي 1–2 نجمة (212)</div></div>
+    <div class="kpi"><div class="v">10,186</div><div class="l">إجمالي المراجعات (3 فروع)</div></div>
+    <div class="kpi"><div class="v">4.66</div><div class="l">متوسط التقييم الموزون</div></div>
+    <div class="kpi"><div class="v">87.0%</div><div class="l">نسبة 5 نجوم</div></div>
+    <div class="kpi"><div class="v">6.7%</div><div class="l">نسبة المراجعات السلبية</div></div>
+    <div class="kpi"><div class="v">8,911</div><div class="l">مراجعات نصية (87.5%)</div></div>
   </div>
-</header>
+</div>
 
-<section class="card">
-  <h2>1 · توزيع التقييمات</h2>
-  <div class="desc">على كامل القاعدة — 2,679 من 2,679 مراجعة (تغطية 100٪)</div>
-  <div class="grid2">
-    <div class="bars">
-      <div class="row"><div class="name">★★★★★ خمس نجوم</div><div class="track"><div class="fill green" style="width:100%"></div></div><div class="num"><b>2,254</b> · 84.1٪</div></div>
-      <div class="row"><div class="name">★★★★ أربع نجوم</div><div class="track"><div class="fill" style="width:5.9%"></div></div><div class="num"><b>132</b> · 4.9٪</div></div>
-      <div class="row"><div class="name">★★★ ثلاث نجوم</div><div class="track"><div class="fill gold" style="width:3.6%"></div></div><div class="num"><b>81</b> · 3.0٪</div></div>
-      <div class="row"><div class="name">★★ نجمتان</div><div class="track"><div class="fill amber" style="width:2.0%"></div></div><div class="num"><b>46</b> · 1.7٪</div></div>
-      <div class="row"><div class="name">★ نجمة واحدة</div><div class="track"><div class="fill red" style="width:7.4%"></div></div><div class="num"><b>166</b> · 6.2٪</div></div>
+<main>
+
+<div class="card">
+<h2><span class="num">1</span>مقارنة الفروع الثلاثة</h2>
+<table>
+<tr><th>الفرع</th><th>المراجعات</th><th>متوسط التقييم</th><th>5 نجوم</th><th>سلبي (1-2⭐)</th></tr>
+<tr><td>مكعب – التعاون، الرياض</td><td>2,679</td><td>4.59</td><td>84.1%</td><td><span class="tag r">7.9%</span></td></tr>
+<tr><td>مكعب – الملقا، الرياض (طريق أنس بن مالك)</td><td>2,978</td><td><strong>4.75</strong> 🏆</td><td>92.0%</td><td><span class="tag g">5.4%</span> ✅ الأقل</td></tr>
+<tr><td>مكعب – الربيع، الرياض (طريق الملك عبدالعزيز)</td><td><strong>4,529</strong> 📈 الأكبر</td><td>4.64</td><td>85.4%</td><td><span class="tag r">6.8%</span> ⚠️ الأعلى</td></tr>
+</table>
+<p style="font-size:12.5px;color:var(--muted);margin-top:10px">فرع الملقا هو الأعلى تقييمًا والأقل سلبيةً رغم أنه ليس الأصغر — يستحق دراسة كنموذج تشغيلي مرجعي. فرع الربيع هو الأكبر حجمًا لكن لديه أعلى نسبة سلبية بين الفروع الثلاثة.</p>
+</div>
+
+<div class="card">
+<h2><span class="num">2</span>أكثر المنتجات ذكرًا على مستوى الشركة (الفروع الثلاثة مجتمعة)</h2>
+<div class="bars">
+  <div class="row"><div class="lbl">داش كام</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">1,553 (17.4%)</div></div>
+  <div class="row"><div class="lbl">حماية شاشة</div><div class="track"><div class="fill" style="width:11%"></div></div><div class="val">171 (1.9%)</div></div>
+  <div class="row"><div class="lbl">شواحن</div><div class="track"><div class="fill" style="width:10%"></div></div><div class="val">153 (1.7%)</div></div>
+  <div class="row"><div class="lbl">جرابات/كفرات</div><div class="track"><div class="fill" style="width:6%"></div></div><div class="val">95 (1.1%)</div></div>
+  <div class="row"><div class="lbl">حوامل جوال</div><div class="track"><div class="fill" style="width:5%"></div></div><div class="val">79 (0.9%)</div></div>
+  <div class="row"><div class="lbl">سماعات</div><div class="track"><div class="fill" style="width:2%"></div></div><div class="val">29 (0.3%)</div></div>
+  <div class="row"><div class="lbl">باور بانك</div><div class="track"><div class="fill" style="width:1%"></div></div><div class="val">18 (0.2%)</div></div>
+</div>
+<p style="font-size:12.5px;color:var(--muted);margin-top:10px">النسب من إجمالي المراجعات النصية للفروع الثلاثة (8,911). الداش كام هو المنتج المحوري لهوية مكعب في كل الفروع الثلاثة بلا استثناء — أعلى بكثير من أي منتج آخر.</p>
+</div>
+
+<div class="card">
+<h2><span class="num">3</span>أكثر الخدمات ذكرًا على مستوى الشركة</h2>
+<div class="bars">
+  <div class="row"><div class="lbl">التركيب</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">1,608 (18.0%)</div></div>
+  <div class="row"><div class="lbl">الشرح</div><div class="track"><div class="fill" style="width:37%"></div></div><div class="val">597 (6.7%)</div></div>
+  <div class="row"><div class="lbl">السرعة</div><div class="track"><div class="fill" style="width:34%"></div></div><div class="val">539 (6.0%)</div></div>
+  <div class="row"><div class="lbl">النصيحة</div><div class="track"><div class="fill" style="width:23%"></div></div><div class="val">370 (4.2%)</div></div>
+  <div class="row"><div class="lbl">الضمان/الاستبدال</div><div class="track"><div class="fill" style="width:13%"></div></div><div class="val">207 (2.3%)</div></div>
+  <div class="row"><div class="lbl">الصيانة</div><div class="track"><div class="fill" style="width:7%"></div></div><div class="val">118 (1.3%)</div></div>
+  <div class="row"><div class="lbl">المواعيد</div><div class="track"><div class="fill" style="width:2%"></div></div><div class="val">35 (0.4%)</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2><span class="num">4</span>صفات الإيجاب الأكثر تكرارًا على مستوى الشركة</h2>
+<div class="bars">
+  <div class="row"><div class="lbl">الأخلاق</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">870 (9.8%)</div></div>
+  <div class="row"><div class="lbl">التعاون</div><div class="track"><div class="fill" style="width:98%"></div></div><div class="val">855 (9.6%)</div></div>
+  <div class="row"><div class="lbl">الاحترافية</div><div class="track"><div class="fill" style="width:90%"></div></div><div class="val">784 (8.8%)</div></div>
+  <div class="row"><div class="lbl">البشاشة</div><div class="track"><div class="fill" style="width:22%"></div></div><div class="val">195 (2.2%)</div></div>
+</div>
+<p style="font-size:12.5px;color:var(--muted);margin-top:10px">هذه الصفات الثلاث (الأخلاق، التعاون، الاحترافية) هي القيم الأعلى ذكرًا في <strong>كل فرع من الفروع الثلاثة على حدة</strong> بدون استثناء — تُعد هوية خدمة ثابتة ومتكررة لمكعب على مستوى الشركة، وليست صدفة فرع واحد.</p>
+</div>
+
+<div class="card">
+<h2><span class="num">5</span>أكثر السلبيات تكرارًا عبر أكثر من فرع (أنماط تشغيلية عامة)</h2>
+<table>
+<tr><th>السلبية</th><th>عدد (3 فروع)</th><th>النسبة من كل النصوص</th><th>موجودة في</th></tr>
+<tr><td>سعر مرتفع</td><td>172</td><td>1.9%</td><td>الملقا + الربيع (الأبرز) + التعاون</td></tr>
+<tr><td>سوء تعامل / رد فعل من موظف أو خدمة عملاء</td><td>108</td><td>1.2%</td><td>الفروع الثلاثة</td></tr>
+<tr><td>منتج تالف / تعطّل بعد الشراء</td><td>76</td><td>0.9%</td><td>الفروع الثلاثة</td></tr>
+<tr><td>تعثر الضمان/الاستبدال</td><td>54</td><td>0.6%</td><td>الفروع الثلاثة</td></tr>
+<tr><td>موظف واحد فقط / ازدحام في وقت الذروة</td><td>31</td><td>0.3%</td><td>الملقا بشكل أبرز</td></tr>
+<tr><td>انتظار طويل / شعور بالتجاهل</td><td>26</td><td>0.3%</td><td>الفروع الثلاثة</td></tr>
+</table>
+<p style="font-size:12.5px;color:var(--muted);margin-top:10px"><strong>الملاحظة الأهم:</strong> "سوء التعامل" و"تعثر الضمان/الاستبدال" ظهرتا كسلبية مؤثرة في <strong>الفروع الثلاثة جميعها</strong> رغم اختلاف الموظفين والموقع تمامًا — هذا يشير بقوة إلى أن المشكلة سياسة/تدريب على مستوى الشركة، وليست مشكلة فرع أو موظف بعينه.</p>
+</div>
+
+<div class="card">
+<h2><span class="num">6</span>توصيات استراتيجية على مستوى الشركة</h2>
+<ol class="rec">
+<li>وحّد سياسة الضمان والاستبدال عبر كل الفروع وبصياغة مكتوبة وواضحة للعميل عند الشراء — هذه المشكلة تكررت في الفروع الثلاثة بأنماط متشابهة (رفض بسبب تفاصيل شكلية كالعبوة، أو "سوء استخدام" دون فحص واضح).<span class="ev">الدليل: 54 مراجعة (0.6%) عبر الفروع الثلاثة تذكر تعثر الضمان</span></li>
+<li>ابنِ برنامج تدريب موحد لخدمة العملاء (وليس فقط موظفي الفرع) على التعامل مع الشكاوى دون رد دفاعي — نمط "الكلام من طرف الفم" أو تجاهل الشكوى تكرر حرفيًا في أكثر من فرع.<span class="ev">الدليل: 108 مراجعة (1.2%) عبر الفروع الثلاثة تذكر سوء التعامل</span></li>
+<li>اجعل "الشرح الوافي + النصيحة الصادقة + الاحترافية في التركيب" هوية الخدمة الأساسية لعلامتك المنافسة — هذه بالضبط القيم التي يمدح بها عملاء مكعب موظفيهم في كل فرع بلا استثناء، وهي فجوة يمكن التفوق فيها إذا نُفّذت بشكل أفضل.<span class="ev">الدليل: الأخلاق 9.8%، التعاون 9.6%، الاحترافية 8.8% — ثابتة عبر الفروع الثلاثة</span></li>
+<li>لا تجعل الداش كام وحده محور نشاطك — لكن استثمر فيه بقوة كمنتج جذب، فهو يمثل وحده أكثر من عُشر كل المراجعات المكتوبة في مكعب على مستوى الشركة.<span class="ev">الدليل: 1,553 مراجعة (17.4%) تذكر الداش كام تحديدًا</span></li>
+<li>ادرس فرع الملقا كنموذج تشغيلي مرجعي (أعلى تقييم 4.75 وأقل نسبة سلبية 5.4%) — قارن كثافة الموظفين، حداثة المكان، وتوزيع الأدوار فيه مقابل فرعي التعاون والربيع لفهم ما الذي يصنع الفرق.<span class="ev">الدليل: فارق 0.16 نقطة تقييم و 1.4 نقطة مئوية سلبية بين الملقا والربيع</span></li>
+<li>خطط لكثافة كادر تتناسب مع حجم الفرع من اليوم الأول — فرع الربيع (الأكبر حجمًا) لديه أعلى نسبة سلبية، ما قد يشير إلى ضغط تشغيلي مرتبط بالحجم وليس بجودة الخدمة نفسها.<span class="ev">الدليل: الربيع 6.8% سلبية مقابل 5.4% في الملقا رغم فريق موظفين أوسع في الربيع</span></li>
+<li>راقب حساسية السعر كمؤشر مبكر — أظهرت شكاوى السعر أعلى تكرار في الفرع الأكبر (الربيع)، وهذا نمط شائع يتكرر مع نمو الفرع وزيادة عدد العملاء الجدد الأقل ولاءً.<span class="ev">الدليل: 172 مراجعة (1.9%) عبر الفروع الثلاثة، أعلى تركّز في الربيع</span></li>
+<li>استثمر في تجربة عملاء رقمية أوضح (سناب/واتساب) لمعرفة توفر المنتجات قبل الزيارة — شكوى "ما فيه رد واضح" ظهرت في أكثر من فرع وتضر بالثقة رغم صغر حجمها العددي.<span class="ev">الدليل: مذكورة في مراجعات سلبية من فرعي الملقا والربيع</span></li>
+</ol>
+</div>
+
+<div class="card">
+<h2><span class="num">7</span>الداشبوردات التفصيلية لكل فرع</h2>
+<div class="grid3">
+  <div class="branch-card">
+    <h3>فرع التعاون</h3>
+    <div class="addr">حي التعاون، الرياض</div>
+    <div class="stats">
+      <div class="stat">2,679 مراجعة<b>4.59</b></div>
+      <div class="stat">سلبي<b>7.9%</b></div>
     </div>
-    <div>
-      <table>
-        <thead><tr><th>المؤشر</th><th>العدد</th><th>النسبة</th></tr></thead>
-        <tbody>
-          <tr><td>مراجعات إيجابية (4–5 نجوم)</td><td class="n">2,386</td><td>89.1٪</td></tr>
-          <tr><td>مراجعات محايدة (3 نجوم)</td><td class="n">81</td><td>3.0٪</td></tr>
-          <tr><td>مراجعات سلبية (1–2 نجمة)</td><td class="n">212</td><td>7.9٪</td></tr>
-          <tr><td>مراجعات بنص مكتوب</td><td class="n">2,306</td><td>86.1٪</td></tr>
-          <tr><td>مراجعات بتقييم فقط (بدون نص)</td><td class="n">373</td><td>13.9٪</td></tr>
-          <tr><td>مراجعات مفصّلة (أكثر من 200 حرف)</td><td class="n">167</td><td>7.2٪ من النصية</td></tr>
-          <tr><td>مراجعات بالعربية</td><td class="n">2,157</td><td>93.5٪ من النصية</td></tr>
-          <tr><td>مراجعات بالإنجليزية/أخرى</td><td class="n">149</td><td>6.5٪ من النصية</td></tr>
-        </tbody>
-      </table>
+    <a class="btn" href="branch-taawun.html">عرض الداشبورد التفصيلي</a>
+  </div>
+  <div class="branch-card">
+    <h3>فرع الملقا</h3>
+    <div class="addr">طريق أنس بن مالك، الرياض</div>
+    <div class="stats">
+      <div class="stat">2,978 مراجعة<b>4.75</b></div>
+      <div class="stat">سلبي<b>5.4%</b></div>
     </div>
+    <a class="btn" href="branch-malqa.html">عرض الداشبورد التفصيلي</a>
   </div>
-</section>
-
-<section class="card">
-  <h2>2 · أكثر المنتجات ذكراً في المراجعات</h2>
-  <div class="desc">عدد المراجعات التي ذكرت المنتج صراحة — النسبة من 2,306 مراجعة نصية</div>
-  <div class="bars">
-    <div class="row"><div class="name">داش كام (كاميرا سيارة)</div><div class="track"><div class="fill teal" style="width:100%"></div></div><div class="num"><b>398</b> · 17.3٪</div></div>
-    <div class="row"><div class="name">شواحن وكيابل</div><div class="track"><div class="fill teal" style="width:10.8%"></div></div><div class="num"><b>43</b> · 1.9٪</div></div>
-    <div class="row"><div class="name">كفرات / أغطية جوال</div><div class="track"><div class="fill teal" style="width:7.8%"></div></div><div class="num"><b>31</b> · 1.3٪</div></div>
-    <div class="row"><div class="name">حامل جوال / ستاند</div><div class="track"><div class="fill teal" style="width:6.0%"></div></div><div class="num"><b>24</b> · 1.0٪</div></div>
-    <div class="row"><div class="name">حماية شاشة (اسكرين بروتكتر)</div><div class="track"><div class="fill teal" style="width:5.3%"></div></div><div class="num"><b>21</b> · 0.9٪</div></div>
-    <div class="row"><div class="name">سماعات</div><div class="track"><div class="fill teal" style="width:2.8%"></div></div><div class="num"><b>11</b> · 0.5٪</div></div>
-    <div class="row"><div class="name">كروت ذاكرة</div><div class="track"><div class="fill teal" style="width:1.8%"></div></div><div class="num"><b>7</b> · 0.3٪</div></div>
-    <div class="row"><div class="name">باور بانك / بطاريات</div><div class="track"><div class="fill teal" style="width:1.8%"></div></div><div class="num"><b>7</b> · 0.3٪</div></div>
-    <div class="row"><div class="name">كاربلاي / أنظمة سيارة</div><div class="track"><div class="fill teal" style="width:1.3%"></div></div><div class="num"><b>5</b> · 0.2٪</div></div>
-    <div class="row"><div class="name">مبخرة وإكسسوارات سيارة أخرى</div><div class="track"><div class="fill teal" style="width:0.5%"></div></div><div class="num"><b>2</b> · 0.1٪</div></div>
-  </div>
-  <div class="note">
-    <b>القراءة الاستراتيجية:</b> الداش كام يهيمن بفارق ضخم — 398 مراجعة، أي أكثر من <b>9 أضعاف</b> ثاني أكثر منتج مذكور (الشواحن، 43). المنتجات الأخرى تُشترى لكنها لا تُولّد مراجعات، لأنها لا تتضمن خدمة تركيب أو استشارة. أي منافس يريد بناء سمعة سريعة يجب أن يبني حول <b>الداش كام + التركيب</b> تحديداً.
-  </div>
-</section>
-
-<section class="card">
-  <h2>3 · أكثر الخدمات ذكراً (محركات المراجعة الفعلية)</h2>
-  <div class="desc">عدد المراجعات التي ذكرت الخدمة — النسبة من 2,306 مراجعة نصية</div>
-  <div class="bars">
-    <div class="row"><div class="name">التركيب (داش كام/حماية)</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="num"><b>399</b> · 17.3٪</div></div>
-    <div class="row"><div class="name">سرعة الخدمة والإنجاز</div><div class="track"><div class="fill" style="width:42.4%"></div></div><div class="num"><b>169</b> · 7.3٪</div></div>
-    <div class="row"><div class="name">شرح وتعليم استخدام المنتج</div><div class="track"><div class="fill" style="width:40.6%"></div></div><div class="num"><b>162</b> · 7.0٪</div></div>
-    <div class="row"><div class="name">النصح والاستشارة قبل الشراء</div><div class="track"><div class="fill" style="width:39.1%"></div></div><div class="num"><b>156</b> · 6.8٪</div></div>
-    <div class="row"><div class="name">الضمان والاستبدال</div><div class="track"><div class="fill" style="width:12.5%"></div></div><div class="num"><b>50</b> · 2.2٪</div></div>
-    <div class="row"><div class="name">الصيانة وحل مشكلة بعد البيع</div><div class="track"><div class="fill" style="width:10.8%"></div></div><div class="num"><b>43</b> · 1.9٪</div></div>
-    <div class="row"><div class="name">حجز موعد</div><div class="track"><div class="fill" style="width:1.8%"></div></div><div class="num"><b>7</b> · 0.3٪</div></div>
-  </div>
-  <div class="note">
-    <b>الملاحظة الحرجة:</b> خدمة التركيب (399) تعادل تقريباً عدد ذكر منتج الداش كام نفسه (398) — أي أن العميل لا يشتري منتجاً، بل يشتري <b>خدمة تركيب</b>. والثلاثي "سرعة + شرح + نصح" مجتمعاً يظهر في <b>487 مراجعة</b>، وهو التعريف الفعلي للتجربة التي يمدحها العملاء.
-  </div>
-</section>
-
-<section class="card">
-  <h2>4 · محركات الرضا — ما الذي يُمدح تحديداً؟</h2>
-  <div class="desc">الصفات المذكورة بالمدح — عدد المراجعات والنسبة من 2,306 مراجعة نصية</div>
-  <div class="bars">
-    <div class="row"><div class="name">التعاون / موظف خدوم</div><div class="track"><div class="fill green" style="width:100%"></div></div><div class="num"><b>595</b> · 25.8٪</div></div>
-    <div class="row"><div class="name">الأخلاق والاحترام</div><div class="track"><div class="fill green" style="width:60.7%"></div></div><div class="num"><b>361</b> · 15.7٪</div></div>
-    <div class="row"><div class="name">الاحترافية والإتقان</div><div class="track"><div class="fill green" style="width:38.8%"></div></div><div class="num"><b>231</b> · 10.0٪</div></div>
-    <div class="row"><div class="name">جودة المنتجات / أصلية</div><div class="track"><div class="fill green" style="width:17.8%"></div></div><div class="num"><b>106</b> · 4.6٪</div></div>
-    <div class="row"><div class="name">تنوع المنتجات وتوفرها</div><div class="track"><div class="fill green" style="width:14.0%"></div></div><div class="num"><b>83</b> · 3.6٪</div></div>
-    <div class="row"><div class="name">الشغل النظيف / إخفاء الأسلاك</div><div class="track"><div class="fill green" style="width:14.0%"></div></div><div class="num"><b>83</b> · 3.6٪</div></div>
-    <div class="row"><div class="name">الأمانة والصدق (عدم البيع الزائد)</div><div class="track"><div class="fill green" style="width:11.4%"></div></div><div class="num"><b>68</b> · 2.9٪</div></div>
-    <div class="row"><div class="name">البشاشة والابتسامة</div><div class="track"><div class="fill green" style="width:11.3%"></div></div><div class="num"><b>67</b> · 2.9٪</div></div>
-    <div class="row"><div class="name">سعر جيد / عروض مغرية</div><div class="track"><div class="fill green" style="width:11.3%"></div></div><div class="num"><b>67</b> · 2.9٪</div></div>
-    <div class="row"><div class="name">فخر بالكادر السعودي</div><div class="track"><div class="fill green" style="width:9.6%"></div></div><div class="num"><b>57</b> · 2.5٪</div></div>
-    <div class="row"><div class="name">الصبر وسعة الصدر</div><div class="track"><div class="fill green" style="width:6.4%"></div></div><div class="num"><b>38</b> · 1.6٪</div></div>
-  </div>
-  <div class="note">
-    <b>الاستنتاج:</b> الصفات المرتبطة بـ<b>سلوك الموظف</b> (تعاون + أخلاق + احترافية + بشاشة + صبر) تُذكر في <b>1,292 مراجعة</b> مجتمعة، بينما الصفات المرتبطة بـ<b>المنتج نفسه</b> (جودة + تنوع + سعر) تُذكر في <b>256 مراجعة</b> فقط — أي أن سلوك الموظف يُذكر بمعدل <b>5 أضعاف</b> المنتج. هذا هو جوهر النموذج التنافسي لمكعب.
-  </div>
-</section>
-
-<section class="card">
-  <h2>5 · أكثر الموظفين ذكراً بالاسم</h2>
-  <div class="desc">مطابقة نصية دقيقة (تراعي السوابق واللواحق العربية) — عدد المراجعات التي ذكرت الاسم، والنسبة من 2,306 مراجعة نصية</div>
-  <div class="grid2">
-    <div class="bars">
-      <div class="row"><div class="name">عبدالعزيز</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="num"><b>265</b> · 11.5٪</div></div>
-      <div class="row"><div class="name">سعود</div><div class="track"><div class="fill" style="width:95.5%"></div></div><div class="num"><b>253</b> · 11.0٪</div></div>
-      <div class="row"><div class="name">عبدالله</div><div class="track"><div class="fill" style="width:69.8%"></div></div><div class="num"><b>185</b> · 8.0٪</div></div>
-      <div class="row"><div class="name">إبراهيم</div><div class="track"><div class="fill" style="width:44.2%"></div></div><div class="num"><b>117</b> · 5.1٪</div></div>
-      <div class="row"><div class="name">تركي</div><div class="track"><div class="fill" style="width:35.8%"></div></div><div class="num"><b>95</b> · 4.1٪</div></div>
-      <div class="row"><div class="name">خالد</div><div class="track"><div class="fill" style="width:28.7%"></div></div><div class="num"><b>76</b> · 3.3٪</div></div>
-      <div class="row"><div class="name">طارق</div><div class="track"><div class="fill" style="width:24.5%"></div></div><div class="num"><b>65</b> · 2.8٪</div></div>
-      <div class="row"><div class="name">ناصر</div><div class="track"><div class="fill" style="width:24.5%"></div></div><div class="num"><b>65</b> · 2.8٪</div></div>
-      <div class="row"><div class="name">يحيى</div><div class="track"><div class="fill" style="width:21.9%"></div></div><div class="num"><b>58</b> · 2.5٪</div></div>
-      <div class="row"><div class="name">عبدالإله</div><div class="track"><div class="fill" style="width:18.9%"></div></div><div class="num"><b>50</b> · 2.2٪</div></div>
-      <div class="row"><div class="name">يوسف</div><div class="track"><div class="fill" style="width:17.0%"></div></div><div class="num"><b>45</b> · 2.0٪</div></div>
-      <div class="row"><div class="name">عبدالرحمن</div><div class="track"><div class="fill" style="width:13.6%"></div></div><div class="num"><b>36</b> · 1.6٪</div></div>
-      <div class="row"><div class="name">أسامة</div><div class="track"><div class="fill" style="width:13.6%"></div></div><div class="num"><b>36</b> · 1.6٪</div></div>
-      <div class="row"><div class="name">منصور</div><div class="track"><div class="fill" style="width:11.7%"></div></div><div class="num"><b>31</b> · 1.3٪</div></div>
-      <div class="row"><div class="name">راكان</div><div class="track"><div class="fill" style="width:10.9%"></div></div><div class="num"><b>29</b> · 1.3٪</div></div>
+  <div class="branch-card">
+    <h3>فرع الربيع</h3>
+    <div class="addr">طريق الملك عبدالعزيز، الرياض</div>
+    <div class="stats">
+      <div class="stat">4,529 مراجعة<b>4.64</b></div>
+      <div class="stat">سلبي<b>6.8%</b></div>
     </div>
-    <div>
-      <table>
-        <thead><tr><th>الاسم الكامل (حين ذُكر)</th><th>عدد المراجعات</th></tr></thead>
-        <tbody>
-          <tr><td>عبدالله التميمي</td><td class="n">62</td></tr>
-          <tr><td>طارق المالكي</td><td class="n">55</td></tr>
-          <tr><td>عبدالعزيز الزهراني</td><td class="n">53</td></tr>
-          <tr><td>سعود الدويش</td><td class="n">17</td></tr>
-          <tr><td>يوسف الشمري</td><td class="n">12</td></tr>
-          <tr><td>إبراهيم الشبانات</td><td class="n">11</td></tr>
-          <tr><td>عبدالإله العمري</td><td class="n">9</td></tr>
-          <tr><td>تركي العنزي</td><td class="n">5</td></tr>
-          <tr><td>يوسف الغريميل</td><td class="n">5</td></tr>
-          <tr><td>خالد النغيمشي</td><td class="n">5</td></tr>
-          <tr><td>عبدالعزيز الحربي</td><td class="n">5</td></tr>
-          <tr><td>سعود السبيعي</td><td class="n">4</td></tr>
-        </tbody>
-      </table>
-      <div class="note" style="margin-top:14px">
-        <b>1,308 مراجعة</b> تذكر اسم موظف صراحةً = <b>56.7٪</b> من كل المراجعات النصية، و<b>48.8٪</b> من إجمالي الـ2,679.<br>
-        وفي المراجعات الخمس نجوم تحديداً: <b>64٪</b> منها تذكر اسم موظف — أي أن التقييم الكامل يكاد يكون <b>مشروطاً بوجود موظف مميز</b>.
-      </div>
-    </div>
+    <a class="btn" href="branch-rabee.html">عرض الداشبورد التفصيلي</a>
   </div>
-</section>
+</div>
+</div>
 
-<section class="card">
-  <h2>6 · قائمة السلبيات مرتبة — تحليل الـ212 مراجعة السلبية</h2>
-  <div class="desc">من 212 مراجعة سلبية (1–2 نجمة)، منها 181 تحتوي نصاً قابلاً للتحليل. النسب محسوبة من الـ181 ومن إجمالي القاعدة</div>
-  <table>
-    <thead><tr><th>#</th><th>الشكوى</th><th>عدد المراجعات</th><th>٪ من السلبيات</th><th>٪ من كل المراجعات</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td><b>ضمان/استبدال مرفوض أو متعثر</b></td><td class="n">28</td><td>15.5٪</td><td>1.05٪</td></tr>
-      <tr><td>2</td><td><b>انتظار طويل / تجاهل العميل داخل الفرع</b></td><td class="n">25</td><td>13.8٪</td><td>0.93٪</td></tr>
-      <tr><td>3</td><td><b>أسلوب موظف سيء / قلة تعاون</b></td><td class="n">25</td><td>13.8٪</td><td>0.93٪</td></tr>
-      <tr><td>4</td><td>منتج معطل أو جودة رديئة</td><td class="n">16</td><td>8.8٪</td><td>0.60٪</td></tr>
-      <tr><td>5</td><td>سعر مرتفع / مبالغ فيه</td><td class="n">14</td><td>7.7٪</td><td>0.52٪</td></tr>
-      <tr><td>6</td><td>عدم الرد على واتساب/الجوال/الإيميل</td><td class="n">12</td><td>6.6٪</td><td>0.45٪</td></tr>
-      <tr><td>7</td><td>حرارة الفرع / سوء التهوية والترتيب</td><td class="n">11</td><td>6.1٪</td><td>0.41٪</td></tr>
-      <tr><td>8</td><td>عدم توفر المنتجات في الفرع</td><td class="n">10</td><td>5.5٪</td><td>0.37٪</td></tr>
-      <tr><td>9</td><td>صيانة بطيئة أو غير مجدية (إرسال للوكيل)</td><td class="n">7</td><td>3.9٪</td><td>0.26٪</td></tr>
-      <tr><td>10</td><td>مشاكل تركيب (أسلاك ظاهرة / إعدادات خاطئة)</td><td class="n">6</td><td>3.3٪</td><td>0.22٪</td></tr>
-      <tr><td>11</td><td>عروض مضللة / سعر غير مطابق للإعلان</td><td class="n">4</td><td>2.2٪</td><td>0.15٪</td></tr>
-      <tr><td>12</td><td>مواقف السيارات / موقع الفرع</td><td class="n">2</td><td>1.1٪</td><td>0.07٪</td></tr>
-    </tbody>
-  </table>
-
-  <h2 style="margin-top:26px;font-size:16px">شكاوى التقييم المحايد (3 نجوم — 81 مراجعة، منها 52 بنص)</h2>
-  <div class="desc">هؤلاء عملاء "شبه راضين" — أسهل فئة يمكن كسبها من المنافس</div>
-  <div class="bars">
-    <div class="row"><div class="name">سعر مرتفع</div><div class="track"><div class="fill amber" style="width:100%"></div></div><div class="num"><b>8</b> مراجعات</div></div>
-    <div class="row"><div class="name">حرارة/بيئة الفرع</div><div class="track"><div class="fill amber" style="width:50%"></div></div><div class="num"><b>4</b> مراجعات</div></div>
-    <div class="row"><div class="name">عدم توفر المنتج</div><div class="track"><div class="fill amber" style="width:37.5%"></div></div><div class="num"><b>3</b> مراجعات</div></div>
-    <div class="row"><div class="name">أسلوب موظف</div><div class="track"><div class="fill amber" style="width:25%"></div></div><div class="num"><b>2</b> مراجعات</div></div>
-    <div class="row"><div class="name">ضمان/استبدال</div><div class="track"><div class="fill amber" style="width:25%"></div></div><div class="num"><b>2</b> مراجعات</div></div>
-    <div class="row"><div class="name">انتظار طويل</div><div class="track"><div class="fill amber" style="width:25%"></div></div><div class="num"><b>2</b> مراجعات</div></div>
-  </div>
-
-  <div class="grid2" style="margin-top:22px">
-    <div>
-      <div style="font-weight:700;color:var(--navy);margin-bottom:6px">اقتباسات حرفية — الضمان والاستبدال</div>
-      <div class="quote">"نجمة واحدة لأن الضمان غير متعاون… رفضت استلمه خوفاً من الانفجار… وتم الرفض وعدم التعاون"</div>
-      <div class="quote">"اشتريت سلك آيفون انكر وانكسر بأقل من شهر ورفضوا استبداله بسبب سوء الاستخدام"</div>
-      <div class="quote">"كانت تحت الضمان… قالوا جيبيه نركبه مجاناً، ويوم جبته قالوا ادفعي 50 ريال! وين المصداقية؟"</div>
-    </div>
-    <div>
-      <div style="font-weight:700;color:var(--navy);margin-bottom:6px">اقتباسات حرفية — الانتظار وأسلوب الموظف</div>
-      <div class="quote">"انتظرنا أكثر من 20 دقيقة داخل المحل محد خدمنا! أسوأ تجربة… موظف واحد بس يخدم الناس هذي كلها"</div>
-      <div class="quote">"تدخل تقعد تدور بين الأرفف ربع ساعة ماحد يقلك تحتاج شي… واللي يحزن انهم يشوفونك منتظر"</div>
-      <div class="quote">"مكعب عندهم أصناف مميزة بس ماعندهم خدمة عملاء" — رأي متداول في المجالس حسب المراجعة</div>
-    </div>
-  </div>
-</section>
-
-<section class="card">
-  <h2>7 · مؤشرات الولاء والترشيح</h2>
-  <div class="desc">إشارات صريحة في نص المراجعات — من 2,306 مراجعة نصية</div>
-  <div class="grid2">
-    <div class="bars">
-      <div class="row"><div class="name">ينصح صراحة بالتعامل معهم</div><div class="track"><div class="fill green" style="width:100%"></div></div><div class="num"><b>81</b> · 3.5٪</div></div>
-      <div class="row"><div class="name">قارن بمنافس وفضّل مكعب</div><div class="track"><div class="fill green" style="width:18.5%"></div></div><div class="num"><b>15</b> · 0.7٪</div></div>
-      <div class="row"><div class="name">عميل متكرر / سيعود</div><div class="track"><div class="fill green" style="width:18.5%"></div></div><div class="num"><b>15</b> · 0.7٪</div></div>
-      <div class="row"><div class="name">جاء بتوصية من شخص آخر</div><div class="track"><div class="fill green" style="width:6.2%"></div></div><div class="num"><b>5</b> · 0.2٪</div></div>
-    </div>
-    <div>
-      <div style="font-weight:700;color:var(--navy);margin-bottom:6px">الفروع المذكورة بالاسم</div>
-      <table>
-        <thead><tr><th>الفرع</th><th>عدد الذكر</th></tr></thead>
-        <tbody>
-          <tr><td>حي الوادي</td><td class="n">14</td></tr>
-          <tr><td>أبو بكر الصديق</td><td class="n">13</td></tr>
-          <tr><td>الخبر</td><td class="n">7</td></tr>
-          <tr><td>الملك عبدالعزيز</td><td class="n">3</td></tr>
-          <tr><td>الملقا</td><td class="n">2</td></tr>
-          <tr><td>السويدي</td><td class="n">2</td></tr>
-          <tr><td>المصيف</td><td class="n">1</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section class="card">
-  <h2>8 · التوصيات التنفيذية لمشروعك — مبنية على الأرقام أعلاه</h2>
-  <div class="desc">كل توصية مربوطة بالدليل الرقمي المستخرج من المراجعات</div>
-
-  <div class="insight"><div class="num2">1</div><div>
-    <h3>ابنِ العلامة حول "الداش كام + التركيب" أولاً، ووسّع لاحقاً</h3>
-    <p>الداش كام مذكور في 398 مراجعة والتركيب في 399 — أي أكثر من 9 أضعاف ثاني منتج. هذا هو المنتج الوحيد الذي يولّد مراجعات لأنه يتضمن خدمة يشعر بها العميل. ابدأ متخصصاً فيه بدل التشتت في تشكيلة واسعة.</p>
-    <div class="ev">الدليل: 398 مراجعة داش كام مقابل 43 للشواحن (المنتج الثاني)</div>
-  </div></div>
-
-  <div class="insight"><div class="num2">2</div><div>
-    <h3>وظّف على أساس السلوك لا الخبرة الفنية فقط — واجعل الموظف "علامة"</h3>
-    <p>1,308 مراجعة (56.7٪) تذكر اسم موظف، و64٪ من المراجعات الخمس نجوم تحديداً تذكر اسماً. صفات السلوك تُذكر بمعدل 5 أضعاف صفات المنتج. بطاقات أسماء بارزة + نظام حوافز مرتبط بذكر الاسم في المراجعات.</p>
-    <div class="ev">الدليل: 1,292 ذكر لصفات الموظف مقابل 256 لصفات المنتج</div>
-  </div></div>
-
-  <div class="insight"><div class="num2">3</div><div>
-    <h3>سياسة ضمان مكتوبة وسخية — هذه أكبر ثغرة عند المنافس</h3>
-    <p>الضمان/الاستبدال هو الشكوى رقم 1 في المراجعات السلبية (28 من 181 = 15.5٪). كل حالة رفض تتحول لمراجعة نجمة واحدة. اعتمد سياسة استبدال فوري خلال مدة محددة بلا نقاش، واجعلها رسالة تسويقية علنية.</p>
-    <div class="ev">الدليل: 28 شكوى ضمان — أعلى فئة سلبية منفردة</div>
-  </div></div>
-
-  <div class="insight"><div class="num2">4</div><div>
-    <h3>حل مشكلة الانتظار = ثاني أكبر فرصة تفوق</h3>
-    <p>الانتظار وتجاهل العميل يمثلان 25 شكوى (13.8٪ من السلبيات)، وأغلبها بسبب موظف واحد يخدم عدة عملاء. نظام مواعيد إلزامي + موظف "مستقبِل" مخصص يحيي كل داخل خلال 30 ثانية.</p>
-    <div class="ev">الدليل: 25 شكوى انتظار + 25 شكوى أسلوب موظف = 50 من 181 (27.6٪)</div>
-  </div></div>
-
-  <div class="insight"><div class="num2">5</div><div>
-    <h3>اجعل "التركيب النظيف وإخفاء الأسلاك" وعداً تسويقياً معلناً</h3>
-    <p>83 مراجعة تمدح نظافة التركيب وإخفاء الأسلاك تحديداً، بينما 6 مراجعات سلبية تشتكي من أسلاك ظاهرة. هذه أوضح نقطة تمايز فنية يمكن تسويقها بصور "قبل/بعد".</p>
-    <div class="ev">الدليل: 83 مدح للتركيب النظيف مقابل 6 شكاوى</div>
-  </div></div>
-
-  <div class="insight"><div class="num2">6</div><div>
-    <h3>درّب على "الاستشارة الصادقة" وليس البيع الزائد</h3>
-    <p>68 مراجعة تمدح الأمانة وعدم البيع الزائد صراحة، و156 تمدح النصح قبل الشراء. في المقابل، شكاوى "التظليل" وترقية العميل لمنتج أغلى ظهرت في السلبيات. اجعل عدم البيع الزائد سياسة معلنة.</p>
-    <div class="ev">الدليل: 156 ذكر للنصح + 68 للأمانة</div>
-  </div></div>
-
-  <div class="insight"><div class="num2">7</div><div>
-    <h3>قناة واتساب برد مضمون خلال ساعة</h3>
-    <p>12 شكوى عن عدم الرد على القنوات الرقمية، إحداها وصلت لتهديد بشكوى لوزارة التجارة. التزام معلن بزمن رد محدد يعالج ثغرة واضحة عند المنافس.</p>
-    <div class="ev">الدليل: 12 شكوى (6.6٪ من السلبيات)</div>
-  </div></div>
-
-  <div class="insight"><div class="num2">8</div><div>
-    <h3>تسعير شفاف مع تبرير القيمة — أو منافسة سعرية مباشرة</h3>
-    <p>14 شكوى سعر في السلبيات + 8 شكاوى في التقييم المحايد (3 نجوم) = 22 عميلاً يرى السعر مبالغاً فيه. في المقابل 67 مراجعة تمدح العروض. الفرصة: وضوح "لماذا هذا السعر" أو سعر أقل بخدمة مماثلة.</p>
-    <div class="ev">الدليل: 22 شكوى سعر مقابل 67 مدح للعروض</div>
-  </div></div>
-
-  <div class="insight"><div class="num2">9</div><div>
-    <h3>بيئة فرع مريحة — تفصيل صغير بأثر كبير على التقييم</h3>
-    <p>11 شكوى سلبية + 4 شكاوى محايدة عن الحرارة وسوء التهوية، بعضها خفّض التقييم من 5 إلى 3 نجوم رغم رضا العميل عن الخدمة. تكييف جيد وترتيب واضح يحميان تقييمك مجاناً.</p>
-    <div class="ev">الدليل: 15 شكوى بيئة فرع، بعضها خفّض تقييماً كان سيكون 5 نجوم</div>
-  </div></div>
-
-  <div class="insight"><div class="num2">10</div><div>
-    <h3>استهدف عملاء الـ3 نجوم — أسهل شريحة للكسب</h3>
-    <p>81 عميلاً أعطوا 3 نجوم، شكواهم الأساسية السعر (8) والحرارة (4) والتوفر (3) — كلها مشاكل تشغيلية سهلة الحل ولا علاقة لها بجودة المنتج. هؤلاء عملاء جاهزون للتحول لمن يحل مشاكلهم البسيطة.</p>
-    <div class="ev">الدليل: 81 مراجعة بـ3 نجوم (3.0٪) بشكاوى تشغيلية بحتة</div>
-  </div></div>
-</section>
+</main>
 
 <footer>
-  <b>المنهجية والقيود:</b><br>
-  • تم سحب <b>جميع</b> مراجعات صفحة "مكعب MOKAB" على خرائط جوجل (2,679 مراجعة، تغطية 100٪) بتاريخ 2 أغسطس 2026، وحُفظت كاملة في ملف <code>mokab_all_reviews.json</code> للرجوع إليها لاحقاً دون إعادة سحب.<br>
-  • توزيع التقييمات ونسب الإيجابي/السلبي محسوبة على كامل الـ2,679.<br>
-  • تحليل المنتجات والخدمات والصفات والشكاوى مبني على مطابقة نصية آلية بقوائم كلمات مفتاحية موسّعة، مطبّقة على الـ2,306 مراجعة التي تحتوي نصاً (الباقي 373 مراجعة تقييم نجوم فقط بدون تعليق مكتوب، وهي غير قابلة للتحليل النصي).<br>
-  • أسماء الموظفين استُخرجت بمطابقة تراعي السوابق واللواحق العربية لتفادي النتائج الكاذبة (مثال: كلمة "تركيب" كانت تُحسب خطأً كاسم "تركي" في التحليل الأولي، وتم تصحيحها).<br>
-  • مراجعة واحدة قد تُحسب في أكثر من فئة إذا ذكرت عدة مواضيع — لذلك مجموع الفئات قد يتجاوز 100٪، وهو سلوك متوقع في تحليل المواضيع.
+<strong>منهجية التحليل:</strong> يجمع هذا الداشبورد نتائج تحليل 100% من مراجعات ثلاثة فروع لمكعب على خرائط جوجل (10,186 مراجعة إجمالًا): التعاون (2,679)، الملقا (2,978)، الربيع (4,529) — كل فرع تم التحقق من كونه موقعًا مستقلًا بمعرّف مختلف على خرائط جوجل قبل تحليله. التحليل المجمّع (منتجات/خدمات/صفات/سلبيات) أُجري حسابيًا على كامل النصوص من الفروع الثلاثة معًا (8,911 مراجعة نصية). متوسط التقييم الموزون محسوب على أساس عدد المراجعات الفعلي لكل فرع (وليس متوسط بسيط للثلاث متوسطات). الفئات قد تتداخل لذلك مجموع النسب داخل كل قسم قد يتجاوز 100%. لكل فرع داشبورد تفصيلي منفصل بمنهجية وتحليل أعمق (روابط في القسم السابع).
 </footer>
 
-</div>
 </body>
 </html>
